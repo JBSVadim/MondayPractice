@@ -29,7 +29,7 @@ SELECT * FROM "workers" WHERE "name" = 'Petr';
 SELECT * FROM "workers" WHERE "name" != 'Petr';
 SELECT * FROM "workers" Where extract(year from age("birthday")) = 27 AND "salary" = 1000;
 SELECT * FROM "workers" WHERE extract(year from age("birthday")) BETWEEN 26 AND 28;
-SELECT * FROM "workers" WHERE extract(year from age("birthday"))  BETWEEN 23 AND 27 AND "salary" BETWEEN 400 AND 1000;
+SELECT * FROM "workers" WHERE extract(year from age("birthday"))  BETWEEN 23 AND 27 OR "salary" BETWEEN 400 AND 1000;
 SELECT * FROM "workers" WHERE extract(year from age("birthday")) = 27 AND "salary" != 400;
 
 DELETE FROM "workers" WHERE "id" = 7 RETURNING "id", "name";
