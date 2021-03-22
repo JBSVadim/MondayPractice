@@ -35,10 +35,28 @@ SELECT * FROM "workers" WHERE extract(year from age("birthday")) = 27 AND "salar
 DELETE FROM "workers" WHERE "id" = 7 RETURNING "id", "name";
 DELETE FROM "workers" WHERE "name" = 'Kolya' RETURNING "id", "name";
 DELETE FROM "workers" WHERE extract(year from age("birthday")) = 23 RETURNING "id", "name";
+DROP TABLE "hogwarts_position_list"
+
 
 CREATE TABLE "hogwarts_position_list" (
   "id" serial PRIMARY KEY,
-  "position" VARCHAR(68) NOT NULL,
- )
+  "position" VARCHAR(68) NOT NULL CHECK ("position" != '')
+);
+INSERT INTO "hogwarts_position_list" ("position") VALUES ('Coach'),('Strip Dancer'), ('Black Jack Diller'),('Slut');
+SELECT * FROM "hogwarts_position_list";
 
-CREATE TABLE ""
+CREATE TABLE "workers_to_position" (
+  "worker_id" int REFERENCES "workers"("id"),
+  "position" int REFERENCES "hogwarts_position_list" ("id")
+)
+INSERT INTO "workers_to_position" VALUES (1,1), (2,2), (4,3),(5,4)
+SELECT * FROM "workers_to_position"
+
+
+SELECT avg("height") AS "Avarange height" FROM "users";
+SELECT avg("height"), "is_male" AS "Avarange height" FROM "users" GROUP BY "is_male";
+SELECT min("height"), "is_male" FROm "users" GROUP BY "is_male";
+SELECT min("height"), max("height"), avg("height"), "is_male" FROm "users" GROUP BY "is_male";
+SELECT COUNT(*) FROM "users" WHERE "birthday" = '1970-1-1';
+SELECT COUNT(*) FROM "users" WHERE "first_name" = 'William';
+SELECT COUNT(*) FROm "users" WHERE extract(year from age("birthday")) BETWEEN 20 AND 30;
